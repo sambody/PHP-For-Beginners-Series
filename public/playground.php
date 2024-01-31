@@ -1,5 +1,6 @@
 <?php
 
+// installed package using Composer
 use Illuminate\Support\Collection;
 
 require __DIR__.'/../vendor/autoload.php';

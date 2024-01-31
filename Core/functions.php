@@ -2,8 +2,11 @@
 
 use Core\Response;
 
+// Sometimes functions can be turned into separate classes
+
 function dd($value)
 {
+    // dump and die
     echo "<pre>";
     var_dump($value);
     echo "</pre>";
@@ -11,7 +14,7 @@ function dd($value)
     die();
 }
 
-function urlIs($value)
+function urlIs($value): bool
 {
     return $_SERVER['REQUEST_URI'] === $value;
 }
@@ -25,8 +28,10 @@ function abort($code = 404)
     die();
 }
 
-function authorize($condition, $status = Response::FORBIDDEN)
+function authorize($condition, $status = Response::FORBIDDEN): bool
 {
+    // check for authorization condition
+    // send default status value
     if (! $condition) {
         abort($status);
     }
@@ -34,13 +39,15 @@ function authorize($condition, $status = Response::FORBIDDEN)
     return true;
 }
 
-function base_path($path)
+function base_path($path): string
 {
     return BASE_PATH . $path;
 }
 
-function view($path, $attributes = [])
+function view($path, $attributes = []): void
 {
+    // For each key/value pair of the associative array, it will create a variable in the current symbol table
+    // eg. 'heading' => 'About Us'
     extract($attributes);
 
     require base_path('views/' . $path);
@@ -54,5 +61,6 @@ function redirect($path)
 
 function old($key, $default = '')
 {
+    // shorthand, return empty string (or optional param) if not existing
     return Core\Session::get('old')[$key] ?? $default;
 }

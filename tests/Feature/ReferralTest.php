@@ -1,5 +1,6 @@
 <?php
 
+// Feature test
 it('allows subscribers to earn money by referring their friends', function () {
     // Referral
     // redeem

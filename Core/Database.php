@@ -6,7 +6,7 @@ use PDO;
 
 class Database
 {
-    public $connection;
+    public PDO $connection;
     public $statement;
 
     public function __construct($config, $username = 'root', $password = '')
@@ -18,22 +18,24 @@ class Database
         ]);
     }
 
-    public function query($query, $params = [])
+    public function query($query, $params = []): static
     {
         $this->statement = $this->connection->prepare($query);
 
         $this->statement->execute($params);
 
-        return $this;
+        return $this; // make chainable
     }
 
     public function get()
     {
+        // get all
         return $this->statement->fetchAll();
     }
 
     public function find()
     {
+        // get single
         return $this->statement->fetch();
     }
 

@@ -2,18 +2,21 @@
 
 namespace Core;
 
-class ValidationException extends \Exception
+use Exception;
+
+class ValidationException extends Exception
 {
-    public readonly array $errors;
+    public readonly array $errors; // readonly instead of protected
     public readonly array $old;
 
     public static function throw($errors, $old)
     {
-       $instance = new static('The form failed to validate.');
+        // construct the exception
+        $instance = new static('The form failed to validate.');
 
-       $instance->errors = $errors;
-       $instance->old = $old;
+        $instance->errors = $errors;
+        $instance->old = $old;
 
-       throw $instance;
+        throw $instance;
     }
 }

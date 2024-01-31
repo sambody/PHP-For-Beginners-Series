@@ -12,16 +12,17 @@ if (! Validator::string($_POST['body'], 1, 1000)) {
 }
 
 if (! empty($errors)) {
-    return view("notes/create.view.php", [
+    view("notes/create.view.php", [
         'heading' => 'Create Note',
         'errors' => $errors
     ]);
 }
 
+// happy path, if no errors continue
 $db->query('INSERT INTO notes(body, user_id) VALUES(:body, :user_id)', [
     'body' => $_POST['body'],
     'user_id' => 1
 ]);
 
 header('location: /notes');
-die();
+die(); // not necessary, since it's the end of the file

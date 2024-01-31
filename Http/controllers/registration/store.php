@@ -20,7 +20,7 @@ if (!Validator::string($password, 7, 255)) {
 }
 
 if (! empty($errors)) {
-    return view('registration/create.view.php', [
+    view('registration/create.view.php', [
         'errors' => $errors
     ]);
 }

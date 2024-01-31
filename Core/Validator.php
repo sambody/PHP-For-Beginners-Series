@@ -2,9 +2,10 @@
 
 namespace Core;
 
+// Form validator, static methods
 class Validator
 {
-    public static function string($value, $min = 1, $max = INF)
+    public static function string($value, $min = 1, $max = INF): bool
     {
         $value = trim($value);
 
@@ -18,6 +19,7 @@ class Validator
 
     public static function greaterThan(int $value, int $greaterThan): bool
     {
+        // only used as example in unit testing
         return $value > $greaterThan;
     }
 }

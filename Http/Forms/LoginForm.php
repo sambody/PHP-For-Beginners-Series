@@ -7,7 +7,7 @@ use Core\Validator;
 
 class LoginForm
 {
-    protected $errors = [];
+    protected array $errors = [];
 
     public function __construct(public array $attributes)
     {
@@ -20,29 +20,30 @@ class LoginForm
         }
     }
 
-    public static function validate($attributes)
+    public static function validate($attributes): static
     {
+        // new LoginForm (this class itself)
         $instance = new static($attributes);
 
         return $instance->failed() ? $instance->throw() : $instance;
     }
 
-    public function throw()
+    public function throw(): void
     {
         ValidationException::throw($this->errors(), $this->attributes);
     }
 
-    public function failed()
+    public function failed(): int
     {
         return count($this->errors);
     }
 
-    public function errors()
+    public function errors(): array
     {
         return $this->errors;
     }
 
-    public function error($field, $message)
+    public function error($field, $message): static
     {
         $this->errors[$field] = $message;
 
