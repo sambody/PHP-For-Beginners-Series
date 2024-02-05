@@ -6,6 +6,7 @@ class Authenticator
 {
     public function attempt($email, $password): bool
     {
+        // todo ?
         $user = App::resolve(Database::class)
             ->query('select * from users where email = :email', [
             'email' => $email

@@ -46,7 +46,7 @@ function base_path($path): string
 
 function view($path, $attributes = []): void
 {
-    // For each key/value pair of the associative array, it will create a variable in the current symbol table
+    // For each key/value pair of the associative array, it will create a separate variable
     // eg. 'heading' => 'About Us'
     extract($attributes);
 
@@ -55,12 +55,13 @@ function view($path, $attributes = []): void
 
 function redirect($path)
 {
-    header("location: {$path}");
+    header("location: $path");
     exit();
 }
 
 function old($key, $default = '')
 {
-    // shorthand, return empty string (or optional param) if not existing
+    // shorthand, get old value, return empty string (or optional param) if not existing
+    // use in form to add old submitted value
     return Core\Session::get('old')[$key] ?? $default;
 }

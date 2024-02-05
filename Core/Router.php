@@ -12,7 +12,7 @@ class Router
 
     public function add($method, $uri, $controller): static
     {
-        // add to routes array, return it
+        // add to routes array, return instance
         $this->routes[] = [
             'method' => $method,
             'uri' => $uri,
@@ -26,6 +26,7 @@ class Router
     public function get($uri, $controller): static
     {
         // add a GET route, return it (to be able to chain it with "only")
+        // eg. $router->get('/', 'controllers/index.php');
         return $this->add('GET', $uri, $controller);
     }
 
@@ -55,16 +56,22 @@ class Router
 
     public function only($key): static
     {
-        // eg. get(...)->only('guest');
-        // todo ?
+        // for checking authentication; eg. get(...)->only('guest');
+        // add to middleware
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
 
         return $this;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function route($uri, $method)
     {
         // todo ?
+        // eg. $route->route($uri)
+        // To route where ever it needs to go:
+        // check if it matches with an existing route
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 Middleware::resolve($route['middleware']);
@@ -73,6 +80,7 @@ class Router
             }
         }
 
+        // no matching uri in routes
         $this->abort();
     }
 

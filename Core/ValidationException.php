@@ -9,6 +9,9 @@ class ValidationException extends Exception
     public readonly array $errors; // readonly instead of protected
     public readonly array $old;
 
+    /**
+     * @throws ValidationException
+     */
     public static function throw($errors, $old)
     {
         // construct the exception

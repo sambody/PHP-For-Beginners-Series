@@ -4,7 +4,7 @@ namespace Core;
 
 class Session
 {
-    // Static functions
+    // Static functions, access directly
     public static function has($key): bool
     {
         // check if it has key

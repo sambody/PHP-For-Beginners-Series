@@ -9,7 +9,10 @@ class Middleware
         'auth' => Authenticated::class
     ];
 
-    public static function resolve($key)
+    /**
+     * @throws \Exception
+     */
+    public static function resolve($key): void
     {
         if (!$key) {
             return;
@@ -21,6 +24,7 @@ class Middleware
             throw new \Exception("No matching middleware found for key '{$key}'.");
         }
 
+        // todo ?
         (new $middleware)->handle();    // shorthand, since used only once
     }
 }

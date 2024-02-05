@@ -6,11 +6,13 @@ use Exception;
 
 class Container
 {
+    // todo ?
+    // used in bootstrap
     protected array $bindings = [];
 
     public function bind($key, $resolver): void
     {
-        // add to array
+        // add to array - key + function
         $this->bindings[$key] = $resolver;
     }
 
@@ -19,7 +21,7 @@ class Container
      */
     public function resolve($key)
     {
-        // get, return the corresponding function if it exists
+        // get the corresponding function if it exists
         if (!array_key_exists($key, $this->bindings)) {
             throw new Exception("No matching binding found for {$key}");
         }

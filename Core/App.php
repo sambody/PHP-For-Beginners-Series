@@ -9,7 +9,7 @@ class App
     // set container
     public static function setContainer($container)
     {
-        static::$container = $container;
+        static::$container = $container;        // or self::$container
     }
 
     // get container
@@ -18,7 +18,7 @@ class App
         return static::$container;
     }
 
-    // todo: what is this ?
+    // todo ?
     public static function bind($key, $resolver)
     {
         static::container()->bind($key, $resolver);
